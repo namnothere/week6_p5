@@ -11,7 +11,6 @@ public class MyApplication extends android.app.Application {
         super.onCreate();
         createChannelNotification();
     }
-
     private void createChannelNotification() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             android.app.NotificationChannel channel = new android.app.NotificationChannel(

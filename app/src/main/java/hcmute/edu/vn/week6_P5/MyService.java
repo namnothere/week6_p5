@@ -133,9 +133,11 @@ public class MyService extends Service {
         if (isPlaying) {
             Log.e("MyService", "sendNotification: isPlaying");
             remoteViews.setOnClickPendingIntent(R.id.imgPlayOrPause, getPendingIntent(this, ACTION_PAUSE));
+            remoteViews.setImageViewResource(R.id.imgPlayOrPause, R.drawable.ic_pause);
         } else {
             Log.e("MyService", "sendNotification: isPause");
             remoteViews.setOnClickPendingIntent(R.id.imgPlayOrPause, getPendingIntent(this, ACTION_RESUME));
+            remoteViews.setImageViewResource(R.id.imgPlayOrPause, R.drawable.ic_play);
         }
 
         remoteViews.setOnClickPendingIntent(R.id.img_clear, getPendingIntent(this, ACTION_CLEAR));
@@ -150,7 +152,7 @@ public class MyService extends Service {
     }
 
     private PendingIntent getPendingIntent(@NotNull Context context, int action) {
-        Intent intent = new Intent(this, MyService.class);
+        Intent intent = new Intent(this, MyReceiver.class);
         intent.putExtra("action_music", action);
         return PendingIntent.getBroadcast(context.getApplicationContext(), action, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
